@@ -9,12 +9,17 @@
     - docker
     - python-docker-py
 
+- name: check if firewalld is active
+  service: name=firewalld
+  register: firewalld_status
+
 - name: set trusted zone for docker
   firewalld:
     zone: trusted
     interface: docker0
     permanent: true
     state: enabled
+  when: firewalld_status.status.ActiveState == "Active"
 
 - name: set docker port
   firewalld:
@@ -22,6 +27,7 @@
     port: 4243/tcp
     permanent: true
     state: enabled
+  when: firewalld_status.status.ActiveState == "Active"
 
 - name: start docker daemon
   systemd:
