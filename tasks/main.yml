@@ -37,6 +37,6 @@
 
 - name: set up docker network
   docker_network:
-    name: isolated_nw
+    name: "{{ docker_network }}"
     driver: bridge
 
