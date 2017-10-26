@@ -1,2 +1,3 @@
 ---
 # vars file for docker_groupwareserver_network
+docker_network: isolated_nw
