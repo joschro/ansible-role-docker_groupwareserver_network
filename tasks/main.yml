@@ -37,6 +37,6 @@
 
 - name: set up docker network
   docker_network:
-    name: "{{ docker_network }}"
+    name: "{{ my_docker_network }}"
     driver: bridge
 
