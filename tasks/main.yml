@@ -13,6 +13,10 @@
   service: name=firewalld
   register: firewalld_status
 
+- name: check if iptables is active
+  service: name=iptables
+  register: iptables_status
+
 - name: set trusted zone for docker
   firewalld:
     zone: trusted
