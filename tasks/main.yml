@@ -1,0 +1,28 @@
+---
+# tasks file for docker_groupwareserver_network
+
+- name: set trusted zone for docker
+  firewalld:
+    zone: trusted
+    interface: docker0
+    permanent: true
+    state: enabled
+
+- name: set docker port
+  firewalld:
+    zone: trusted
+    port: 4243/tcp
+    permanent: true
+    state: enabled
+
+- name: start docker daemon
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: set up docker network
+  docker_network:
+    name: isolated_nw
+    driver: bridge
+
